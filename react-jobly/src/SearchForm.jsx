@@ -26,6 +26,8 @@ function SearchForm({ getList }) {
     getList(searchTerms);
   }
 
+  // TODO: consider handling meaningless empty spaces (through trimming)
+
   return (
     <form className="SearchForm" onSubmit={handleSubmit}>
       <input

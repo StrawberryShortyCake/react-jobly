@@ -1,11 +1,11 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import JobList from "./JobList";
-import Companies from "./CompanyList";
+import CompanyList from "./CompanyList";
 import Home from "./Home";
 import CompanyDetails from "./CompanyDetails";
 
 /**
- * Purpose: route to different components based on Nav links
+ * Purpose: route to different components based on URLs
  *
  * Props: none
  * States: none
@@ -19,7 +19,7 @@ function RoutesList() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/jobs" element={<JobList />} />
-      <Route path="/companies" element={<Companies />} />
+      <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:handle" element={<CompanyDetails />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

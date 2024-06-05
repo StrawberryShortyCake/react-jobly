@@ -1,42 +1,51 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import JobCard from "./JobCard";
 import JoblyApi from "./api";
-const defaultJobs = [
-  {
-    title: "title 1",
-    salary: 100000,
-    equity: "0.5",
-    name: "company 1",
-  },
-  {
-    title: "title 2",
-    salary: 200000,
-    equity: "0.5",
-    name: "company 1",
-  },
-];
+const defaultCompany = {
+  handle: "handle1",
+  name: "name1",
+  description: "description1",
+  numEmployees: 10000,
+  logoUrl: "",
+  jobs: [
+    {
+      id: 1,
+      title: "title 1",
+      salary: 100000,
+      equity: "0.5",
+      name: "company 1",
+    },
+    {
+      id: 2,
+      title: "title 2",
+      salary: 200000,
+      equity: "0.5",
+      name: "company 1",
+    },
+  ],
+};
 
 /**
  * Purpose: renders a list of companies
  *
  * Props: none
- * States: companyData
+ * States: company
  *
  * App > RoutesList > CompanyDetails
  */
 
-// { handle, name, description, numEmployees, logoUrl, jobs }
 function CompanyDetails() {
-  const [company, setCompany] = useState(null);
+  const [company, setCompany] = useState({ jobs: [] }); // FIXME: should match what jobs are, which is null o start
   const { handle } = useParams();
+
+  // FIXME: consider handling when company cannot be found & 404
 
   console.log("CompanyDetails", { handle, company });
 
   async function getCompanyDetails() {
     console.log("running getCompanyDetails in CompanyDetails");
     const company = await JoblyApi.getCompany(handle);
-    console.log("company details retrieved", company);
     setCompany(company);
   }
 
@@ -45,19 +54,24 @@ function CompanyDetails() {
     getCompanyDetails();
   }, []);
 
+  //FIXME: content isn't updating when the URL changes
+
   return (
     <div className="CompanyDetails">
+      Today's company:{" "}
+      <Link to="/companies/anderson-arias-morrow">Company!</Link>
       {company.name}
       {company.salary}
       {company.equity}
       <ul>
         {company.jobs.map((job) => (
-          <JobCard
-            key={job.id}
-            title={job.title}
-            salary={job.salary}
-            equity={job.equity}
-          />
+          <li key={job.id}>
+            <JobCard
+              title={job.title}
+              salary={job.salary}
+              equity={job.equity}
+            />
+          </li>
         ))}
       </ul>
     </div>

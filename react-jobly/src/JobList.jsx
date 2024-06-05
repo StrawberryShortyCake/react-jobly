@@ -30,7 +30,8 @@ const defaultJobs = [
  *  App > RoutesList > Jobs
  */
 function JobList() {
-  const [jobs, setJobs] = useState(defaultJobs);
+  //TODO: make a loading component
+  const [jobs, setJobs] = useState(defaultJobs); // FIXME: this is really not good user experience, null conditional
 
   async function getJobList(searchTerm = "") {
     console.log("running getJobList in JobList");
@@ -44,8 +45,7 @@ function JobList() {
     getJobList();
   }, []);
 
-  // onload = useEffect, triggered on load
-  // on click => passed in as a function, triggered on click
+  // TODO: consider handling if no company is returned
   return (
     <div className="JobList">
       <SearchForm getList={getJobList} />

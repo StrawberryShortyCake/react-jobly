@@ -58,6 +58,7 @@ class JoblyApi {
   /** Get a list of companies. */
 
   static async getCompanies(data = {}) {
+    //FIXME: handle your own arguments
     console.log(data);
     let res = await this.request(`companies/`, data);
     console.log(res);
@@ -67,12 +68,11 @@ class JoblyApi {
   /** Get a list of jobs. */
 
   static async getJobs(data = {}) {
+    //FIXME: handle your own arguments
     let res = await this.request(`jobs/`, data);
     return res.jobs;
   }
 
-
-  // obviously, you'll add a lot here ...
 }
 
 export default JoblyApi;

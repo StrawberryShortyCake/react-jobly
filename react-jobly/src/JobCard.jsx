@@ -1,7 +1,7 @@
 import "./JobCard.css";
 
 /**
- * Purpose: renders a single company
+ * Purpose: renders a single job
  *
  * Props: title, salary, equity, name
  * States: none
