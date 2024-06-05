@@ -33,10 +33,11 @@ function JobList() {
   return (
     <div className="JobList">
       <SearchForm getList={getJobList} />
+      <h1 className="JobList-heading">All Jobs</h1>
       {jobs.length === 0 && <p>No search results found!</p>}
       <ul>
         {jobs.map((job) => (
-          <li key={job.handle}>
+          <li className="JobList-item" key={job.handle}>
             <JobCard
               title={job.title}
               salary={job.salary}

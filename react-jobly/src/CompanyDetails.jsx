@@ -3,6 +3,7 @@ import { useParams, Link, NavLink } from "react-router-dom";
 import JobCard from "./JobCard";
 import JoblyApi from "./api";
 import NotFound404 from "./NotFound404";
+import "./CompanyDetails.css";
 
 /**
  * Purpose: renders a list of companies
@@ -52,14 +53,10 @@ function CompanyDetails() {
 
   return (
     <div className="CompanyDetails">
-      Today's company:{" "}
-      <Link to="/companies/anderson-arias-morrow">Company!</Link>
-      {company.name}
-      {company.salary}
-      {company.equity}
+      <h1 className="CompanyDetails-heading">{company.name}</h1>
       <ul>
         {company.jobs.map((job) => (
-          <li key={job.id}>
+          <li key={job.id} className="CompanyDetails-item">
             <JobCard
               title={job.title}
               salary={job.salary}
