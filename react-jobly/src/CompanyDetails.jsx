@@ -31,6 +31,8 @@ function CompanyDetails() {
   const [company, setCompany] = useState(null);
   const { handle } = useParams();
 
+  console.log("CompanyDetails", { handle, company });
+
   async function getCompanyDetails() {
     console.log("running getCompanyDetails in CompanyDetails");
     const company = await JoblyApi.getCompany(handle);
@@ -42,8 +44,6 @@ function CompanyDetails() {
     console.log("useEffect running");
     getCompanyDetails();
   }, []);
-
-  console.log(company);
 
   return (
     <div className="CompanyDetails">
