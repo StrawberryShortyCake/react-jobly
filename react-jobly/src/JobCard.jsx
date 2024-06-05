@@ -3,14 +3,14 @@ import "./JobCard.css";
 /**
  * Purpose: renders a single company
  *
- * Props: key, title, salary, equity, name
+ * Props: title, salary, equity, name
  * States: none
  *
  *  JobList > JobCard
  */
-function JobCard({ key, title, salary, equity, name }) {
+function JobCard({ title, salary, equity, name }) {
   return (
-    <div className="JobCard" key={key}>
+    <div className="JobCard">
       <h3>{title}</h3>
       {name !== undefined ? <p>Company: {name}</p> : ""}
       <p>Salary: {salary}</p>

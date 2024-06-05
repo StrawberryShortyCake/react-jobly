@@ -9,7 +9,7 @@ import { useState } from "react";
  * -searchTerms: string
  *
  * {CompanyList, JobList} -> SearchForm
-*/
+ */
 
 function SearchForm({ getList }) {
   const [searchTerms, setSearchTerms] = useState("");
@@ -21,6 +21,7 @@ function SearchForm({ getList }) {
 
   /** Call parent function */
   function handleSubmit(evt) {
+    console.log("handle submit in search form with searhTerms:", searchTerms);
     evt.preventDefault();
     getList(searchTerms);
   }

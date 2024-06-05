@@ -32,10 +32,11 @@ const defaultJobs = [
 function JobList() {
   const [jobs, setJobs] = useState(defaultJobs);
 
-  async function getJobList(searchTerm = {}) {
+  async function getJobList(searchTerm = "") {
     console.log("running getJobList in JobList");
-    const jobs = await JoblyApi.getJobs();
-    console.log("jobs retrieved");
+    const query = searchTerm.length > 0 ? { title: searchTerm } : {};
+    const jobs = await JoblyApi.getJobs(query);
+    console.log("jobs retrieved", jobs);
     setJobs(jobs);
   }
 
@@ -50,13 +51,14 @@ function JobList() {
       <SearchForm getList={getJobList} />
       <ul>
         {jobs.map((job) => (
-          <JobCard
-            key={job.handle}
-            title={job.title}
-            salary={job.salary}
-            equity={job.equity}
-            name={job.name}
-          />
+          <li key={job.handle}>
+            <JobCard
+              title={job.title}
+              salary={job.salary}
+              equity={job.equity}
+              name={job.name}
+            />
+          </li>
         ))}
       </ul>
     </div>
