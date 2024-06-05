@@ -1,3 +1,4 @@
+import "./Jobs.css";
 /**
  * Purpose: renders a list of jobs
  *
