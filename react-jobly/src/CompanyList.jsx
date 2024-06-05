@@ -1,5 +1,6 @@
 import CompanyDetails from "./CompanyDetails";
 import Company from "./CompanyCard";
+import SearchForm from "./SearchForm";
 
 const defaultCompanies = [
   {
@@ -30,14 +31,21 @@ const defaultCompanies = [
 function CompanyList() {
   const companies = defaultCompanies;
 
+  function getCompanyList(){
+    return "";
+  }
+
   return (
-    <ul>
-      {companies.map((company) => (
-        <li className="Companies" key={company.handle}>
-          <Company companyData={company} />
-        </li>
-      ))}
-    </ul>
+    <div className="CompanyList">
+      <SearchForm getList={getCompanyList} />
+      <ul>
+        {companies.map((company) => (
+          <li className="Companies" key={company.handle}>
+            <Company companyData={company} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 export default CompanyList;
