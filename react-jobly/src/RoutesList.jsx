@@ -13,6 +13,8 @@ import CompanyDetails from "./CompanyDetails";
  *  App > RoutesList
  */
 function RoutesList() {
+  console.log("RoutesList");
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

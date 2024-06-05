@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import CompanyDetails from "./CompanyDetails";
 import Company from "./CompanyCard";
 import SearchForm from "./SearchForm";
+import JoblyApi from "./api";
 
 const defaultCompanies = [
   {
@@ -29,11 +31,19 @@ const defaultCompanies = [
  */
 
 function CompanyList() {
-  const companies = defaultCompanies;
+  const [companies, setCompanies] = useState(defaultCompanies);
 
-  function getCompanyList(){
-    return "";
+  async function getCompanyList(searchTerm = "") {
+    console.log("running getCompanyList in CompanyList");
+    const query = searchTerm.length > 0 ? { nameLike: searchTerm } : {};
+    const companies = await JoblyApi.getCompanies(query);
+    console.log("companies retrieved", companies);
+    setCompanies(companies);
   }
+
+  useEffect(function getCompanyListWhenMounted() {
+    getCompanyList();
+  }, []);
 
   return (
     <div className="CompanyList">

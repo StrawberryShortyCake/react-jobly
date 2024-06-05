@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "./CompanyCard.css";
 /**
  * Purpose: renders a single company
@@ -8,8 +9,12 @@ import "./CompanyCard.css";
  *  CompanyList > CompanyCard
  */
 function CompanyCard({ companyData }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="CompanyCard">
+    <div
+      className="CompanyCard"
+      onClick={() => navigate(`/companies/${companyData.handle}`)}>
       <h2>{companyData.name}</h2>
       <p>{companyData.description}</p>
     </div>
