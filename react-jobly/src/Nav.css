@@ -1,0 +1,18 @@
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 10px;
+}
+
+.Nav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  justify-content: space-between;
+}
+
+/* li: nth-child(); */

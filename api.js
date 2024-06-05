@@ -16,6 +16,9 @@ class JoblyApi {
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
+  /**
+   * Return jobs and companies (for example)
+   */
   static async request(endpoint, data = {}, method = "GET") {
     const url = new URL(`${BASE_URL}/${endpoint}`);
     const headers = {
@@ -51,6 +54,21 @@ class JoblyApi {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
+
+  /** Get a list of companies. */
+
+  static async getCompanies(data = {}) {
+    let res = await this.request(`companies/`, data);
+    return res.companies;
+  }
+
+  /** Get a list of jobs. */
+
+  static async getJobs(data = {}) {
+    let res = await this.request(`jobs/`, data);
+    return res.jobs;
+  }
+
 
   // obviously, you'll add a lot here ...
 }
