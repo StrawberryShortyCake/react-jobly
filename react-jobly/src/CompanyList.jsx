@@ -30,13 +30,11 @@ const defaultCompanies = [
  */
 
 function CompanyList() {
-  const [companies, setCompanies] = useState(defaultCompanies); //FIXME: match user expectations
+  const [companies, setCompanies] = useState(null);
 
   async function getCompanyList(searchTerm = "") {
     console.log("running getCompanyList in CompanyList");
-    // FIXME: this is not really the worry outside of the api
-    const query = searchTerm.length > 0 ? { nameLike: searchTerm } : {};
-    const companies = await JoblyApi.getCompanies(query);
+    const companies = await JoblyApi.getCompanies(searchTerm);
     console.log("companies retrieved", companies);
     setCompanies(companies);
   }
@@ -45,11 +43,16 @@ function CompanyList() {
     getCompanyList();
   }, []);
 
-  //TODO: handle no companies
+  if (companies === null) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="CompanyList">
       <SearchForm getList={getCompanyList} />
+      {companies.length === 0 &&
+        <p>No search results found!</p>
+      }
       <ul>
         {companies.map((company) => (
           <li className="Companies" key={company.handle}>

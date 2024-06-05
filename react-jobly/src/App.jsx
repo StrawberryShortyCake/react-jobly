@@ -4,6 +4,8 @@ import "./App.css";
 import Nav from "./Nav.jsx";
 import RoutesList from "./RoutesList.jsx";
 
+// TODO: do we want to make a loading component?
+
 /** Component for entire page.
  *
  * Props: none

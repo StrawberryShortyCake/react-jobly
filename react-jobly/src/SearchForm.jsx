@@ -23,10 +23,8 @@ function SearchForm({ getList }) {
   function handleSubmit(evt) {
     console.log("handle submit in search form with searhTerms:", searchTerms);
     evt.preventDefault();
-    getList(searchTerms);
+    getList(searchTerms.trim());
   }
-
-  // TODO: consider handling meaningless empty spaces (through trimming)
 
   return (
     <form className="SearchForm" onSubmit={handleSubmit}>

@@ -36,9 +36,10 @@ const defaultCompany = {
  */
 
 function CompanyDetails() {
-  const [company, setCompany] = useState({ jobs: [] }); // FIXME: should match what jobs are, which is null o start
+  const [company, setCompany] = useState(null);
   const { handle } = useParams();
 
+  // FIXME: Andrea
   // FIXME: consider handling when company cannot be found & 404
 
   console.log("CompanyDetails", { handle, company });
@@ -52,9 +53,11 @@ function CompanyDetails() {
   useEffect(function getCompanyDetailsWhenMounted() {
     console.log("useEffect running");
     getCompanyDetails();
-  }, []);
+  }, [handle]);
 
-  //FIXME: content isn't updating when the URL changes
+  if (company === null) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="CompanyDetails">

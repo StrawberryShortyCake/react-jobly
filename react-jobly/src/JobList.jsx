@@ -30,13 +30,11 @@ const defaultJobs = [
  *  App > RoutesList > Jobs
  */
 function JobList() {
-  //TODO: make a loading component
-  const [jobs, setJobs] = useState(defaultJobs); // FIXME: this is really not good user experience, null conditional
+  const [jobs, setJobs] = useState(null);
 
   async function getJobList(searchTerm = "") {
     console.log("running getJobList in JobList");
-    const query = searchTerm.length > 0 ? { title: searchTerm } : {};
-    const jobs = await JoblyApi.getJobs(query);
+    const jobs = await JoblyApi.getJobs(searchTerm);
     console.log("jobs retrieved", jobs);
     setJobs(jobs);
   }
@@ -45,10 +43,16 @@ function JobList() {
     getJobList();
   }, []);
 
-  // TODO: consider handling if no company is returned
+  if (jobs === null) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="JobList">
       <SearchForm getList={getJobList} />
+      {jobs.length === 0 &&
+        <p>No search results found!</p>
+      }
       <ul>
         {jobs.map((job) => (
           <li key={job.handle}>

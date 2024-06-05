@@ -57,19 +57,17 @@ class JoblyApi {
 
   /** Get a list of companies. */
 
-  static async getCompanies(data = {}) {
-    //FIXME: handle your own arguments
-    console.log(data);
-    let res = await this.request(`companies/`, data);
-    console.log(res);
+  static async getCompanies(searchTerm) {
+    const query = searchTerm.length > 0 ? { nameLike: searchTerm } : {};
+    let res = await this.request(`companies/`, query);
     return res.companies;
   }
 
   /** Get a list of jobs. */
 
-  static async getJobs(data = {}) {
-    //FIXME: handle your own arguments
-    let res = await this.request(`jobs/`, data);
+  static async getJobs(searchTerm) {
+    const query = searchTerm.length > 0 ? { title: searchTerm } : {};
+    let res = await this.request(`jobs/`, query);
     return res.jobs;
   }
 
