@@ -3,23 +3,6 @@ import Company from "./CompanyCard";
 import SearchForm from "./SearchForm";
 import JoblyApi from "./api";
 
-const defaultCompanies = [
-  {
-    handle: "handle 1",
-    name: "name1",
-    numEmployees: 10,
-    description: "description 1",
-    logoUrl: "",
-  },
-  {
-    handle: "handle 2",
-    name: "name 2",
-    numEmployees: 20,
-    description: "description 2",
-    logoUrl: "",
-  },
-];
-
 /**
  * Purpose: renders a list of companies
  *
@@ -50,9 +33,7 @@ function CompanyList() {
   return (
     <div className="CompanyList">
       <SearchForm getList={getCompanyList} />
-      {companies.length === 0 &&
-        <p>No search results found!</p>
-      }
+      {companies.length === 0 && <p>No search results found!</p>}
       <ul>
         {companies.map((company) => (
           <li className="Companies" key={company.handle}>
@@ -64,3 +45,21 @@ function CompanyList() {
   );
 }
 export default CompanyList;
+
+// DO NOT DELETE; USE FOR TESTING
+// const defaultCompanies = [
+//   {
+//     handle: "handle 1",
+//     name: "name1",
+//     numEmployees: 10,
+//     description: "description 1",
+//     logoUrl: "",
+//   },
+//   {
+//     handle: "handle 2",
+//     name: "name 2",
+//     numEmployees: 20,
+//     description: "description 2",
+//     logoUrl: "",
+//   },
+// ];
