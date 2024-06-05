@@ -9,7 +9,7 @@ import "./Nav.css";
  */
 function Nav() {
   const activeStyle = {
-    color: "steelblue",
+    color: "whitesmoke",
     marginLeft: "20px",
     textDecoration: "none",
   };
