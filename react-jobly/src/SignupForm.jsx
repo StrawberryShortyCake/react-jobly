@@ -23,22 +23,32 @@ const INITIAL_STATE = {
  * lastName: string,
  * email: string
  * }
+ * - errors: [string, ...]
  *
  * RoutesList -> SignupForm
  */
-function SignupForm({ signup, user }) {
+function SignupForm({ signup }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 
+  /** Handle change to input */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
-  function handleSubmit(evt) {
+  /** Try calling parent function, otherwise set errors */
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
-    navigate("/");
+    try {
+      await signup(formData);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setErrors(err);
+    }
+
   }
 
   return (
@@ -55,6 +65,7 @@ function SignupForm({ signup, user }) {
       <input
         id="SignupForm-password"
         name="password"
+        type="password"
         value={formData.password}
         onChange={handleChange}
         required
@@ -83,7 +94,8 @@ function SignupForm({ signup, user }) {
         onChange={handleChange}
         required
       />
-      {user !== null && user.error !== undefined && <Alert msg={user.error} />}
+      {errors !== null &&
+        errors.map((error) => <Alert key={error} msg={error} />)}
       <button>Submit</button>
     </form>
   );

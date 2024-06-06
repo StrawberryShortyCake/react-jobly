@@ -12,10 +12,24 @@ import "./RoutesList.css";
 /**
  * Purpose: route to different components based on URLs
  *
- * Props: none
+ * Props:
+ * - login: function
+ * - signup: function
+ * - logout: function
+ * - user: object
+ *
  * States: none
  *
- *  App > RoutesList
+ *  App > RoutesList -> {
+ * Home,
+ * LoginForm,
+ * SignupForm,
+ * Logout,
+ * ProfileForm,
+ * JobList,
+ * CompanyList,
+ * CompanyDetail
+ * }
  */
 function RoutesList({ login, signup, logout, user }) {
   console.log("RoutesList");
@@ -26,11 +40,11 @@ function RoutesList({ login, signup, logout, user }) {
         <Route path="/" element={<Home />} />
         <Route
           path="/login"
-          element={<LoginForm login={login} user={user} />}
+          element={<LoginForm login={login} />}
         />
         <Route
           path="/signup"
-          element={<SignupForm signup={signup} user={user} />}
+          element={<SignupForm signup={signup} />}
         />
         <Route path="/logout" element={<Logout logout={logout} />} />
         <Route path="/profile" element={<ProfileForm />} />

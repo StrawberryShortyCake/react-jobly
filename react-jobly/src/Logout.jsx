@@ -1,5 +1,14 @@
 import { Navigate } from "react-router-dom";
-import Nav from "./Nav";
+
+/** Component for logging a user out
+ *
+ * Props:
+ * - logout: function
+ *
+ * State: none
+ *
+ * RoutesList -> Logout
+*/
 
 function Logout({ logout }) {
   logout();

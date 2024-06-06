@@ -7,6 +7,8 @@ import "./Home.css";
  *
  * Props: none
  * States: none
+ * Context:
+ * - user: object
  *
  * App > RoutesList > Home
  */

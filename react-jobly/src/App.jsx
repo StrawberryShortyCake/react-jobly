@@ -17,11 +17,14 @@ import userContext from "./userContext.js";
  * State:
  * - user
  *
+ * App -> {Nav, RoutesList}
+ *
  */
 
 function App() {
   const [user, setUser] = useState(null);
 
+  /** Add a token to JoblyApi and logs a user in */
   async function login(formData) {
     // call the API class for log user in
     await JoblyApi.login(formData);
@@ -31,19 +34,17 @@ function App() {
     setUser(user);
   }
 
+  /** Registers a user, adds a token to JoblyApi, and logs a user in */
   async function signup(formData) {
-    try {
-      // call the API class for sign user up
-      await JoblyApi.signup(formData);
+    // call the API class for sign user up
+    await JoblyApi.signup(formData);
 
-      // update the user state with the result of the getUser API call
-      const user = await JoblyApi.getUser(formData.username);
-      setUser(user);
-    } catch (err) {
-      setUser({ error: err });
-    }
+    // update the user state with the result of the getUser API call
+    const user = await JoblyApi.getUser(formData.username);
+    setUser(user);
   }
 
+  /** Logs a user out */
   function logout() {
     setUser(null);
   }

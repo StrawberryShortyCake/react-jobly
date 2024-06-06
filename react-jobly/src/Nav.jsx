@@ -4,7 +4,8 @@ import "./Nav.css";
 /**
  * Purpose: renders links for nav bar
  *
- * Props: none
+ * Props:
+ * - user: object
  * State: none
  */
 function Nav({ user }) {

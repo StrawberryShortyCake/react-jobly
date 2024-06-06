@@ -11,19 +11,22 @@ const INITIAL_STATE = { username: "", password: "" };
  *
  * State:
  * - formData: { username: string, password: string }
+ * - errors: [string, ...]
  *
  * RoutesList -> LoginForm
  */
-function LoginForm({ login, user }) {
+function LoginForm({ login }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 
+  /** Handle change to input */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
+  /** Try calling parent function, otherwise set errors */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
