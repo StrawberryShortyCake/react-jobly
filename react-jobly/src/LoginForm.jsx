@@ -48,6 +48,7 @@ function LoginForm({ login }) {
       <input
         id="LoginForm-password"
         name="password"
+        type="password"
         value={formData.password}
         onChange={handleChange}
         required

@@ -4,6 +4,7 @@ import "./App.css";
 import Nav from "./Nav.jsx";
 import RoutesList from "./RoutesList.jsx";
 import JoblyApi from "./api.js";
+import userContext from "./userContext.js";
 
 /** Component for entire page.
  *
@@ -48,10 +49,12 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Nav />
-        <RoutesList login={login} signup={signup} logout={logout} />
-      </BrowserRouter>
+      <userContext.Provider value={{ user }}>
+        <BrowserRouter>
+          <Nav user={user} />
+          <RoutesList login={login} signup={signup} logout={logout} />
+        </BrowserRouter>
+      </userContext.Provider>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import "./Nav.css";
  * Props: none
  * State: none
  */
-function Nav() {
+function Nav({ user }) {
   const activeStyle = {
     color: "whitesmoke",
     marginLeft: "20px",
@@ -21,14 +21,32 @@ function Nav() {
           Jobly
         </NavLink>
       </div>
-      <div className="Nav-menu">
-        <NavLink to="/jobs" style={activeStyle}>
-          Jobs
-        </NavLink>
-        <NavLink to="/companies" style={activeStyle}>
-          Companies
-        </NavLink>
-      </div>
+      {user === null &&
+        <div className="Nav-menu">
+          <NavLink to="/login" style={activeStyle}>
+            Login
+          </NavLink>
+          <NavLink to="/signup" style={activeStyle}>
+            Signup
+          </NavLink>
+        </div>
+      }
+      {user !== null &&
+        <div className="Nav-menu">
+          <NavLink to="/jobs" style={activeStyle}>
+            Jobs
+          </NavLink>
+          <NavLink to="/companies" style={activeStyle}>
+            Companies
+          </NavLink>
+          <NavLink to="/profile" style={activeStyle}>
+            Profile
+          </NavLink>
+          <NavLink to="/logout" style={activeStyle}>
+            Log out {user.username}
+          </NavLink>
+        </div>
+      }
     </div>
   );
 }
