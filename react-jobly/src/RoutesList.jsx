@@ -3,6 +3,9 @@ import JobList from "./JobList";
 import CompanyList from "./CompanyList";
 import Home from "./Home";
 import CompanyDetails from "./CompanyDetails";
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
+import ProfileForm from "./ProfileForm";
 import "./RoutesList.css";
 
 /**
@@ -20,6 +23,9 @@ function RoutesList() {
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/profile" element={<ProfileForm />} />
         <Route path="/jobs" element={<JobList />} />
         <Route path="/companies" element={<CompanyList />} />
         <Route path="/companies/:handle" element={<CompanyDetails />} />
