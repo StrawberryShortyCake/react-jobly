@@ -3,22 +3,54 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Nav from "./Nav.jsx";
 import RoutesList from "./RoutesList.jsx";
-
-// TODO: do we want to make a loading component?
+import JoblyApi from "./api.js";
 
 /** Component for entire page.
  *
  * Props: none
- * State: none
+ *
+ * Context:
+ * - firstName
+ * - lastName
+ *
+ * State:
+ * - user
  *
  */
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  async function login(formData) {
+    // call the API class for log user in
+    await JoblyApi.login(formData);
+
+    // update the user state with the result of the getUser API call
+    const user = await JoblyApi.getUser(formData.username);
+    setUser(user);
+  }
+
+  // TODO: make them async
+  async function signup(formData) {
+    // call the API class for sign user up
+    await JoblyApi.signup(formData);
+
+    // update the user state with the result of the getUser API call
+    const user = await JoblyApi.getUser(formData.username);
+    setUser(user);
+  }
+
+  function logout() {
+    setUser(null);
+  }
+
+  // function editUser() {}  TODO: tbd at a later step
+
   return (
     <div className="App">
       <BrowserRouter>
         <Nav />
-        <RoutesList />
+        <RoutesList login={login} signup={signup} logout={logout} />
       </BrowserRouter>
     </div>
   );

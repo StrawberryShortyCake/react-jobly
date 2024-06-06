@@ -5,6 +5,7 @@ import Home from "./Home";
 import CompanyDetails from "./CompanyDetails";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import Logout from "./Logout";
 import ProfileForm from "./ProfileForm";
 import "./RoutesList.css";
 
@@ -16,15 +17,16 @@ import "./RoutesList.css";
  *
  *  App > RoutesList
  */
-function RoutesList() {
+function RoutesList({ login, signup, logout }) {
   console.log("RoutesList");
 
   return (
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/login" element={<LoginForm login={login} />} />
+        <Route path="/signup" element={<SignupForm signup={signup} />} />
+        <Route path="/logout" element={<Logout logout={logout} />} />
         <Route path="/profile" element={<ProfileForm />} />
         <Route path="/jobs" element={<JobList />} />
         <Route path="/companies" element={<CompanyList />} />

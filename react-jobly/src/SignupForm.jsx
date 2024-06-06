@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 const INITIAL_STATE = {
   username: "",
   password: "",
-  fname: "",
-  lname: "",
-  email: ""
+  firstName: "",
+  lastName: "",
+  email: "",
 };
 
 /** Component for signup form
@@ -18,20 +18,20 @@ const INITIAL_STATE = {
  * - formData: {
  * username: string,
  * password: string,
- * fname: string,
- * lname: string,
+ * firstName: string,
+ * lastName: string,
  * email: string
  * }
  *
  * RoutesList -> SignupForm
-*/
+ */
 function SignupForm({ signup }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const navigate = useNavigate();
 
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setFormData(formData => ({ ...formData, [name]: value }));
+    setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
   function handleSubmit(evt) {
@@ -42,10 +42,7 @@ function SignupForm({ signup }) {
 
   return (
     <form className="SignupForm" onSubmit={handleSubmit}>
-      <label
-        htmlFor="SignupForm-username">
-        Username
-      </label>
+      <label htmlFor="SignupForm-username">Username</label>
       <input
         id="SignupForm-username"
         name="username"
@@ -53,10 +50,7 @@ function SignupForm({ signup }) {
         onChange={handleChange}
         required
       />
-      <label
-        htmlFor="SignupForm-password">
-        Password
-      </label>
+      <label htmlFor="SignupForm-password">Password</label>
       <input
         id="SignupForm-password"
         name="password"
@@ -64,32 +58,23 @@ function SignupForm({ signup }) {
         onChange={handleChange}
         required
       />
-      <label
-        htmlFor="SignupForm-fname">
-        First Name
-      </label>
+      <label htmlFor="SignupForm-firstName">First Name</label>
       <input
-        id="SignupForm-fname"
-        name="fname"
-        value={formData.fname}
+        id="SignupForm-firstName"
+        name="firstName"
+        value={formData.firstName}
         onChange={handleChange}
         required
       />
-      <label
-        htmlFor="SignupForm-lname">
-        Last Name
-      </label>
+      <label htmlFor="SignupForm-lastName">Last Name</label>
       <input
-        id="SignupForm-lname"
-        name="lname"
-        value={formData.lname}
+        id="SignupForm-lastName"
+        name="lastName"
+        value={formData.lastName}
         onChange={handleChange}
         required
       />
-      <label
-        htmlFor="SignupForm-email">
-        Email
-      </label>
+      <label htmlFor="SignupForm-email">Email</label>
       <input
         id="SignupForm-email"
         name="email"
