@@ -17,15 +17,21 @@ import "./RoutesList.css";
  *
  *  App > RoutesList
  */
-function RoutesList({ login, signup, logout }) {
+function RoutesList({ login, signup, logout, user }) {
   console.log("RoutesList");
 
   return (
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginForm login={login} />} />
-        <Route path="/signup" element={<SignupForm signup={signup} />} />
+        <Route
+          path="/login"
+          element={<LoginForm login={login} user={user} />}
+        />
+        <Route
+          path="/signup"
+          element={<SignupForm signup={signup} user={user} />}
+        />
         <Route path="/logout" element={<Logout logout={logout} />} />
         <Route path="/profile" element={<ProfileForm />} />
         <Route path="/jobs" element={<JobList />} />

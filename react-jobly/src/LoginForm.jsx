@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 const INITIAL_STATE = { username: "", password: "" };
 
@@ -12,28 +13,30 @@ const INITIAL_STATE = { username: "", password: "" };
  * - formData: { username: string, password: string }
  *
  * RoutesList -> LoginForm
-*/
-function LoginForm({ login }) {
+ */
+function LoginForm({ login, user }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
 
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setFormData(formData => ({ ...formData, [name]: value }));
+    setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
-    navigate("/");
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      setErrors(err);
+    }
   }
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
-      <label
-        htmlFor="LoginForm-username">
-        Username
-      </label>
+      <label htmlFor="LoginForm-username">Username</label>
       <input
         id="LoginForm-username"
         name="username"
@@ -41,10 +44,7 @@ function LoginForm({ login }) {
         onChange={handleChange}
         required
       />
-      <label
-        htmlFor="LoginForm-password">
-        Password
-      </label>
+      <label htmlFor="LoginForm-password">Password</label>
       <input
         id="LoginForm-password"
         name="password"
@@ -53,6 +53,8 @@ function LoginForm({ login }) {
         onChange={handleChange}
         required
       />
+      {errors !== null &&
+        errors.map((error) => <Alert key={error} msg={error} />)}
       <button>Submit</button>
     </form>
   );

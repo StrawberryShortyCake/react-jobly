@@ -31,14 +31,17 @@ function App() {
     setUser(user);
   }
 
-  // TODO: make them async
   async function signup(formData) {
-    // call the API class for sign user up
-    await JoblyApi.signup(formData);
+    try {
+      // call the API class for sign user up
+      await JoblyApi.signup(formData);
 
-    // update the user state with the result of the getUser API call
-    const user = await JoblyApi.getUser(formData.username);
-    setUser(user);
+      // update the user state with the result of the getUser API call
+      const user = await JoblyApi.getUser(formData.username);
+      setUser(user);
+    } catch (err) {
+      setUser({ error: err });
+    }
   }
 
   function logout() {
@@ -52,7 +55,12 @@ function App() {
       <userContext.Provider value={{ user }}>
         <BrowserRouter>
           <Nav user={user} />
-          <RoutesList login={login} signup={signup} logout={logout} />
+          <RoutesList
+            login={login}
+            signup={signup}
+            logout={logout}
+            user={user}
+          />
         </BrowserRouter>
       </userContext.Provider>
     </div>

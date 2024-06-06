@@ -14,6 +14,8 @@ function Nav({ user }) {
     textDecoration: "none",
   };
 
+  // TODO: ask about checking user.username !==  undefined --> bad practice?
+
   return (
     <div className="Nav">
       <div>
@@ -21,7 +23,7 @@ function Nav({ user }) {
           Jobly
         </NavLink>
       </div>
-      {user === null &&
+      {(user === null || user.error !== undefined) && (
         <div className="Nav-menu">
           <NavLink to="/login" style={activeStyle}>
             Login
@@ -30,8 +32,8 @@ function Nav({ user }) {
             Signup
           </NavLink>
         </div>
-      }
-      {user !== null &&
+      )}
+      {user !== null && user.username !== undefined && (
         <div className="Nav-menu">
           <NavLink to="/jobs" style={activeStyle}>
             Jobs
@@ -46,7 +48,7 @@ function Nav({ user }) {
             Log out {user.username}
           </NavLink>
         </div>
-      }
+      )}
     </div>
   );
 }

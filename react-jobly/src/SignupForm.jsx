@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 const INITIAL_STATE = {
   username: "",
@@ -25,7 +26,7 @@ const INITIAL_STATE = {
  *
  * RoutesList -> SignupForm
  */
-function SignupForm({ signup }) {
+function SignupForm({ signup, user }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const navigate = useNavigate();
 
@@ -82,6 +83,7 @@ function SignupForm({ signup }) {
         onChange={handleChange}
         required
       />
+      {user !== null && user.error !== undefined && <Alert msg={user.error} />}
       <button>Submit</button>
     </form>
   );
