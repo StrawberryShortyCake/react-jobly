@@ -31,20 +31,28 @@ import "./RoutesList.css";
  * CompanyDetail
  * }
  */
-function RoutesList({ login, signup, logout }) {
-  console.log("RoutesList");
+function RoutesList({ login, signup, logout, user }) {
+  console.log("Render RoutesList");
 
   return (
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginForm login={login} />} />
-        <Route path="/signup" element={<SignupForm signup={signup} />} />
-        <Route path="/logout" element={<Logout logout={logout} />} />
-        <Route path="/profile" element={<ProfileForm />} />
-        <Route path="/jobs" element={<JobList />} />
-        <Route path="/companies" element={<CompanyList />} />
-        <Route path="/companies/:handle" element={<CompanyDetails />} />
+        {user === null && (
+          <>
+            <Route path="/signup" element={<SignupForm signup={signup} />} />
+            <Route path="/login" element={<LoginForm login={login} />} />
+          </>
+        )}
+        {user !== null && (
+          <>
+            <Route path="/logout" element={<Logout logout={logout} />} />
+            <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/jobs" element={<JobList />} />
+            <Route path="/companies" element={<CompanyList />} />
+            <Route path="/companies/:handle" element={<CompanyDetails />} />
+          </>
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
