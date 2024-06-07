@@ -31,21 +31,15 @@ import "./RoutesList.css";
  * CompanyDetail
  * }
  */
-function RoutesList({ login, signup, logout, user }) {
+function RoutesList({ login, signup, logout }) {
   console.log("RoutesList");
 
   return (
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/login"
-          element={<LoginForm login={login} />}
-        />
-        <Route
-          path="/signup"
-          element={<SignupForm signup={signup} />}
-        />
+        <Route path="/login" element={<LoginForm login={login} />} />
+        <Route path="/signup" element={<SignupForm signup={signup} />} />
         <Route path="/logout" element={<Logout logout={logout} />} />
         <Route path="/profile" element={<ProfileForm />} />
         <Route path="/jobs" element={<JobList />} />

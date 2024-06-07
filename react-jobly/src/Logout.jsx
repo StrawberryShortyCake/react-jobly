@@ -1,4 +1,5 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 /** Component for logging a user out
  *
@@ -8,11 +9,17 @@ import { Navigate } from "react-router-dom";
  * State: none
  *
  * RoutesList -> Logout
-*/
+ */
 
 function Logout({ logout }) {
-  logout();
-  return <Navigate to="/" />;
+  const navigate = useNavigate();
+
+  useEffect(function doLogout() {
+    logout();
+    navigate("/");
+  }, []);
+
+  return null;
 }
 
 export default Logout;

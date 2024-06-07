@@ -48,7 +48,6 @@ function SignupForm({ signup }) {
       console.log(err);
       setErrors(err);
     }
-
   }
 
   return (

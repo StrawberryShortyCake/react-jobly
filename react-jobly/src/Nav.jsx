@@ -10,6 +10,7 @@ import "./Nav.css";
  */
 function Nav({ user }) {
   const activeStyle = {
+    // TODO: keep this in CSS, but we are not using the active class on NavLink
     color: "whitesmoke",
     marginLeft: "20px",
     textDecoration: "none",
@@ -24,7 +25,7 @@ function Nav({ user }) {
           Jobly
         </NavLink>
       </div>
-      {(user === null || user.error !== undefined) && (
+      {user === null && (
         <div className="Nav-menu">
           <NavLink to="/login" style={activeStyle}>
             Login
@@ -34,7 +35,7 @@ function Nav({ user }) {
           </NavLink>
         </div>
       )}
-      {user !== null && user.username !== undefined && (
+      {user !== null && (
         <div className="Nav-menu">
           <NavLink to="/jobs" style={activeStyle}>
             Jobs

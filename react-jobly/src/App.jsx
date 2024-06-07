@@ -25,9 +25,9 @@ function App() {
   const [user, setUser] = useState(null);
 
   /** Add a token to JoblyApi and logs a user in */
-  async function login(formData) {
+  async function logIn(formData) {
     // call the API class for log user in
-    await JoblyApi.login(formData);
+    await JoblyApi.logIn(formData);
 
     // update the user state with the result of the getUser API call
     const user = await JoblyApi.getUser(formData.username);
@@ -35,9 +35,9 @@ function App() {
   }
 
   /** Registers a user, adds a token to JoblyApi, and logs a user in */
-  async function signup(formData) {
+  async function signUp(formData) {
     // call the API class for sign user up
-    await JoblyApi.signup(formData);
+    await JoblyApi.signUp(formData);
 
     // update the user state with the result of the getUser API call
     const user = await JoblyApi.getUser(formData.username);
@@ -45,8 +45,10 @@ function App() {
   }
 
   /** Logs a user out */
-  function logout() {
+  function logOut() {
     setUser(null);
+    JoblyApi.logOut();
+    console.log("TOKEN", JoblyApi.token);
   }
 
   // function editUser() {}  TODO: tbd at a later step
@@ -57,9 +59,9 @@ function App() {
         <BrowserRouter>
           <Nav user={user} />
           <RoutesList
-            login={login}
-            signup={signup}
-            logout={logout}
+            login={logIn}
+            signup={signUp}
+            logout={logOut}
             user={user}
           />
         </BrowserRouter>

@@ -26,8 +26,6 @@ class JoblyApi {
       'content-type': 'application/json',
     };
 
-    console.log("what's our header???", headers);
-
     url.search = (method === "GET")
       ? new URLSearchParams(data).toString()
       : "";
@@ -77,7 +75,7 @@ class JoblyApi {
    * accepts data: { username, password }
   */
 
-  static async login(data) {
+  static async logIn(data) {
 
     let res = await this.request(`auth/token`, data, "POST");
     JoblyApi.token = res.token;
@@ -87,9 +85,16 @@ class JoblyApi {
    * accepts data:  { username, password, firstName, lastName, email }
   */
 
-  static async signup(data) {
+  static async signUp(data) {
     let res = await this.request(`auth/register`, data, "POST");
     JoblyApi.token = res.token;
+  }
+
+  /** log user out, delete a user token from the class
+*/
+
+  static async logOut() {
+    JoblyApi.token = null;
   }
 
   /** get user and create User instance */
