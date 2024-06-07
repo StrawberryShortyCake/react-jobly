@@ -99,8 +99,9 @@ class JoblyApi {
 
   /** get user and create User instance */
 
-  static async getUser(username) {
+  static async getUser(username, token) {
     // note: no need to pass in the token, because this instance should have a token
+    JoblyApi.token = token;
     let res = await this.request(`users/${username}`);
     return res.user;
   }
