@@ -10,6 +10,8 @@ import userContext from "./userContext.js";
  *
  * Props: none
  *
+ * TODO: explain on mount effects
+ *
  * Context:
  * - firstName
  * - lastName
@@ -24,6 +26,7 @@ import userContext from "./userContext.js";
 function App() {
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
+  const [isLoading, setIsLoading] = useState(true);
 
   /** Add a token to JoblyApi and logs a user in */
   async function logIn(formData) {
@@ -33,7 +36,7 @@ function App() {
     localStorage.setItem("token", token);
 
     // update the user state with the result of the getUser API call
-    const user = await JoblyApi.getUser(formData.username);
+    const user = await JoblyApi.getUser(formData.username, token);
     localStorage.setItem("username", user.username);
     setUser(user);
   }
@@ -46,7 +49,7 @@ function App() {
     localStorage.setItem("token", token);
 
     // update the user state with the result of the getUser API call
-    const user = await JoblyApi.getUser(formData.username);
+    const user = await JoblyApi.getUser(formData.username, token);
     localStorage.setItem("username", user.username);
     setUser(user);
   }
@@ -54,24 +57,49 @@ function App() {
   /** Logs a user out */
   function logOut() {
     setUser(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    //NOTE: remove these items from localStorage entirely
     JoblyApi.logOut();
     console.log("TOKEN", JoblyApi.token);
   }
 
-  // TODO: rename this function
   /** Function to log a user in if token in localStorage */
   async function getUser() {
     const username = localStorage.getItem("username");
     const user = await JoblyApi.getUser(username, token);
+    console.log("get User", user);
     setUser(user);
   }
 
-  useEffect(function () {
-    const token = localStorage.getItem("token");
-    if (token !== "undefined") {
-      getUser();
+  useEffect(function loadTokenUserOnMount() {
+    async function loadTokenUser() {
+      const token = localStorage.getItem("token");
+      if (token !== null) {
+        await getUser();
+        /**NOTE: we need to await this otherwise we are loading without a user;
+         * if we want to return to the original route, cannot re-render until we
+         * know there's a user
+         */
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        /** NOTE: no user in localStorage, no further actions besides rendering
+         * the logged out experience
+         */
+      }
     }
+    loadTokenUser();
   }, []);
+
+  if (isLoading) {
+    console.log("isLoading rendered");
+    return <div>Hey! Loading.</div>;
+  }
+  /** NOTE: never load a component until we know whether there's a user
+   * This allows us to let the useEffect to take place after the first render
+   * This is guarding our component
+   */
 
   // function editUser() {}  TODO: tbd at a later step
 

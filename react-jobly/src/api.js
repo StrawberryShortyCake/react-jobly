@@ -12,9 +12,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token = null;
 
   /**
    * Return jobs and companies (for example)
@@ -76,7 +74,6 @@ class JoblyApi {
   */
 
   static async logIn(data) {
-
     let res = await this.request(`auth/token`, data, "POST");
     JoblyApi.token = res.token;
   }
@@ -93,22 +90,17 @@ class JoblyApi {
   /** log user out, delete a user token from the class
 */
 
-  static async logOut() {
+  static logOut() {
     JoblyApi.token = null;
   }
 
   /** get user and create User instance */
 
   static async getUser(username, token) {
-    // note: no need to pass in the token, because this instance should have a token
     JoblyApi.token = token;
     let res = await this.request(`users/${username}`);
     return res.user;
   }
-
-
-
-
 }
 
 export default JoblyApi;
